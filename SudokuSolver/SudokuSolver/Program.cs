@@ -17,14 +17,24 @@ namespace SudokuSolver
 
 			foreach (var file in Directory.EnumerateFiles(Input))
 			{
-				var input = File.ReadAllLines(file);
+				try
+				{
+					var fileName = Path.GetFileName(file);
+					Console.WriteLine(fileName);
 
-				var sw = Stopwatch.StartNew();
-				var solution = Solver.Solve(input);
-				sw.Stop();
-				Console.WriteLine(sw.Elapsed);
+					var input = File.ReadAllLines(file);
 
-				File.WriteAllLines(Path.Combine(Output, Path.GetFileName(file)), solution, Encoding.UTF8);
+					var sw = Stopwatch.StartNew();
+					var solution = Solver.Solve(input);
+					sw.Stop();
+					Console.WriteLine(sw.Elapsed);
+
+					File.WriteAllLines(Path.Combine(Output, fileName), solution, Encoding.UTF8);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.Message);
+				}
 			}
 		}
 	}

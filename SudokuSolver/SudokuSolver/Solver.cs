@@ -41,6 +41,7 @@ namespace SudokuSolver
 		{
 			var ok = false;
 			Dfs(0);
+			if (!ok) throw new InvalidOperationException("The input has no solution.");
 			return Array.ConvertAll(Range9, i => string.Join("", Range9.Select(j => field[i, j])));
 
 			void Dfs(int k)
