@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace SudokuSolver
@@ -9,6 +10,8 @@ namespace SudokuSolver
 	{
 		const string Input = "Input";
 		const string Output = "Output";
+
+		static readonly Encoding UTF8N = new UTF8Encoding();
 
 		static void Main(string[] args)
 		{
@@ -22,14 +25,15 @@ namespace SudokuSolver
 					var fileName = Path.GetFileName(file);
 					Console.WriteLine(fileName);
 
-					var input = File.ReadAllLines(file);
+					var input = File.ReadAllLines(file, UTF8N);
 
 					var sw = Stopwatch.StartNew();
 					var solution = Solver.Solve(input);
 					sw.Stop();
 					Console.WriteLine(sw.Elapsed);
 
-					File.WriteAllLines(Path.Combine(Output, fileName), solution, Encoding.UTF8);
+					var content = string.Join("", solution.Select(x => x + "\n"));
+					File.WriteAllText(Path.Combine(Output, fileName), content, UTF8N);
 				}
 				catch (Exception ex)
 				{

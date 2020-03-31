@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net47</TargetFramework>
-    <Version>1.0.1</Version>
+    <TargetFrameworks>netcoreapp2.1;net47</TargetFrameworks>
+    <Version>1.0.2</Version>
     <AssemblyTitle>Sudoku Solver</AssemblyTitle>
     <Product>KTools</Product>
     <Authors>Keiho Sakapon</Authors>
